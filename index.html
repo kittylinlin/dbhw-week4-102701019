@@ -52,7 +52,7 @@
         if (err) {
             console.log(err);
         } else {
-          var foodList = data.result.results;
+          var foodList = JSON.parse(data);
           var ContentList = foodList.map(function(food) {
 
             var start = "<div class='col-md-4'>";
