@@ -34,17 +34,9 @@
 
     <div class="container">
       <!-- Example row of columns -->
-      <div id="content" class="row"></div>
-    	<div class="sk-cube-grid">
-      	<div class="sk-cube sk-cube1"></div>
-      	<div class="sk-cube sk-cube2"></div>
-      	<div class="sk-cube sk-cube3"></div>
-      	<div class="sk-cube sk-cube4"></div>
-      	<div class="sk-cube sk-cube5"></div>
-      	<div class="sk-cube sk-cube6"></div>
-      	<div class="sk-cube sk-cube7"></div>
-      	<div class="sk-cube sk-cube8"></div>
-      	<div class="sk-cube sk-cube9"></div>
+      <div class=row>
+              <div id="content"></div>
+              <div class=col-md-4>
 
       <hr>
 
@@ -55,29 +47,27 @@
 
   </body>
   <script type="text/javascript">
-	$(document).ready(function() {
-  	getData(function(err, data) {
-    	if(err) {
-      	console.log(err);
-      } else {
-      	var FoodList =JSON.parse(data);
-      	var HTMLFoodList = FoodList.map(function(Food) {
-        	var HTMLString = "<div class='col-md-4 drop-"+(Math.round(Math.random()*10000%2)+1)+"'><div class='panel panel-success'><div class=panel-heading><div style='text-align:center'><h2 style='color:blue'>"+Food.Name+"</h2></div></div></div><img class='img-thumbnail' src='"+Food.Picture1+"'width='300' height='200'><p><ul class='list-group'>";
-        	var items = "";
-        	for (var key in Food) {
-          	if(key!="Id" && key!="Picture1" && key!="Px"&& key!="Py"&& key!="Class"&& key!="Changetime") {
-              items=items+"<li class='list-group-item list-group-item-info'><span class='label label-default label-pill pull-xs-right'>"+key+":"+"</span>"+Food[key]+"</li>";
-          	}
-        	}
-        	var HTMLString = HTMLString+items+"</ul></p><div>";
-        	return HTMLString;
-      	});
-      	HTMLFoodList.forEach(function(html) {
-        	$(html).appendTo("#content");
-      	});
-      	$('.sk-cube-grid').css('display', 'none');
-    	}
-  	});
-	});
+  $(document).ready(function() {
+    getData(function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+          var foodList = data.result.results;
+          var ContentList = foodList.map(function(food) {
+
+            var start = "<div class='col-md-4'>";
+            var foodImage = "<img src=" +food.Picture1+" style=width:300px;height:200px;>";
+            var fooditem = "<p>"+food.Name+"</p>"+"<p>"+food.Description+"</p>"+"<p>地點："+food.Add+"</p><p>電話："+food.Tel+"</p><p>營業時間："+food.Opentime+"</p>";
+            var ContentString = start + foodImage + fooditem ;
+            return ContentString;
+
+            });
+          ContentList.forEach(function(html) {
+              $(html).appendTo("#content");
+            });
+          $('.sk-cube-grid').css('display', 'none');
+        }
+    });
+  });
   </script>
 </html>
