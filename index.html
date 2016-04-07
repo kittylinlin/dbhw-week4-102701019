@@ -34,30 +34,17 @@
 
     <div class="container">
       <!-- Example row of columns -->
-      <table border=2 cellspacing=200>
-        <tbody>
-          <tr>
-            <td>興隆居</td>
-            <td><img src="http://khh.travel/FileArtPic.ashx?id=316&w=1280&h=960" style="width:300px;height:200px;"></td>
-            <td>
-              <p>一大早來到興隆居，真的是人聲鼎沸，創立於1970年的興隆居，以提供「清晨的第一道美食」自居，每天早上熱騰騰出爐的各種美食，的確是挑動每個人的味蕾。在琳瑯滿目的選擇中，最具人氣的就是湯包，使用梨山的高山高麗菜，以及半肥半瘦的胛心肉，加入蔬菜豬大骨高湯，現拌、現包、現蒸，一口咬下鮮甜的湯汁溢出，讓人回味無窮。</p>
-              <p>Address:高雄市前金區六合二路186號</p>
-              <p>Tel:886-7-2616787</p>
-              <p>Opentime:每日03:00-11:00</p>
-            </td>
-          </tr>
-          <tr>
-            <td>味味香廣東汕頭牛豬羊肉爐</td>
-            <td><img src="http://khh.travel/FileArtPic.ashx?id=318&w=1280&h=960" style="width:300px;height:200px;"></td>
-            <td>
-              <p>雖然是平價的火鍋，工夫一點也不馬虎，使用扁魚、柴魚等20多種材料熬製湯頭，無論選擇何種肉類，都能嘗到湯頭加分的效果。味味香現在已傳至第二代，將近50年歷史，老闆特別推薦沙茶羊肉和砂鍋魚頭，還有自己製作的豆皮，沾上店家自行調配的沙茶醬，更是讓人欲罷不能，可別小看沾醬，這可是使用2、30種配料做成的獨門醬料，別處嘗不到。 這家店適合三五好友相約一起來，別忘了點幾道小炒和幾瓶啤酒，大夥兒開懷暢飲。</p>
-              <p>Address:高雄市鹽埕區富野路100號</p>
-              <p>Tel:886-7-5518588</p>
-              <p>Opentime:每日11:00-14:00；17:00-01:00</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="content" class="row"></div>
+    	<div class="sk-cube-grid">
+      	<div class="sk-cube sk-cube1"></div>
+      	<div class="sk-cube sk-cube2"></div>
+      	<div class="sk-cube sk-cube3"></div>
+      	<div class="sk-cube sk-cube4"></div>
+      	<div class="sk-cube sk-cube5"></div>
+      	<div class="sk-cube sk-cube6"></div>
+      	<div class="sk-cube sk-cube7"></div>
+      	<div class="sk-cube sk-cube8"></div>
+      	<div class="sk-cube sk-cube9"></div>
 
       <hr>
 
@@ -67,17 +54,30 @@
     </div> <!-- /container -->
 
   </body>
-<!--
   <script type="text/javascript">
-    $(document).ready(function() {
-      getData(function(err, result) {
-        if(err) {
-          console.log(err);
-        } else {
-          console.log(result);
-        }
-      });
-    });
+	$(document).ready(function() {
+  	getData(function(err, data) {
+    	if(err) {
+      	console.log(err);
+      } else {
+      	var FoodList =JSON.parse(data);
+      	var HTMLFoodList = FoodList.map(function(Food) {
+        	var HTMLString = "<div class='col-md-4 drop-"+(Math.round(Math.random()*10000%2)+1)+"'><div class='panel panel-success'><div class=panel-heading><div style='text-align:center'><h2 style='color:blue'>"+Food.Name+"</h2></div></div></div><img class='img-thumbnail' src='"+Food.Picture1+"'width='300' height='200'><p><ul class='list-group'>";
+        	var items = "";
+        	for (var key in Food) {
+          	if(key!="Id" && key!="Picture1" && key!="Px"&& key!="Py"&& key!="Class"&& key!="Changetime") {
+              items=items+"<li class='list-group-item list-group-item-info'><span class='label label-default label-pill pull-xs-right'>"+key+":"+"</span>"+Food[key]+"</li>";
+          	}
+        	}
+        	var HTMLString = HTMLString+items+"</ul></p><div>";
+        	return HTMLString;
+      	});
+      	HTMLFoodList.forEach(function(html) {
+        	$(html).appendTo("#content");
+      	});
+      	$('.sk-cube-grid').css('display', 'none');
+    	}
+  	});
+	});
   </script>
--->
 </html>
