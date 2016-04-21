@@ -56,7 +56,7 @@
           var ContentList = foodList.map(function(food) {
 
             var start = "<div class='col-md-4'>";
-            var foodImage = "<img src=" +food.Picture1+" style="width:300px;height:200px";>";
+            var foodImage = "<img src=" +food.Picture1+" style='width:300px;height:200px';>";
             var fooditem = "<p>"+food.Name+"</p>"+"<p>"+food.Description+"</p>"+"<p>地點："+food.Add+"</p><p>電話："+food.Tel+"</p><p>營業時間："+food.Opentime+"</p>";
             var ContentString = start + foodImage + fooditem ;
             return ContentString;
